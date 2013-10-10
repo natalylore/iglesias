@@ -4,11 +4,22 @@
  */
 package turismo.religioso.catalogos;
 
+import java.awt.Graphics;
+import java.awt.Image;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 import javax.swing.JOptionPane;
 import turismo.religioso.clases.Galeria;
 
@@ -29,16 +40,16 @@ public class CatalogoGaleria extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call InsertarGaleria(?,?,?)}") ;
+               ObjProcedimiento=conector.prepareCall("{call InsertarGaleria(?,?)}") ;
                ObjProcedimiento.setString(1,miPunto.getDescripcion());
-               //ObjProcedimiento.setBlob(2,miPunto.getImagen());
+               ObjProcedimiento.setBlob(2,convertirImagenABlob(miPunto.getImagen()));
                
                ObjProcedimiento.execute();
                resultado=true;
 
          }catch(Exception pp)
          {
-             JOptionPane.showMessageDialog(null,"Error en Catalogo: InsertarPunto "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null,"Error en Catalogo: InsertarGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
          }finally{
              conector.close();
          }
@@ -46,24 +57,24 @@ public class CatalogoGaleria extends Conexion{
         return resultado;
     }
 
-    /*public static Punto  ObtenerPunto(int IdPunto) throws Exception{
+    public static Galeria  ObtenerGaleria(int Idgaleria) throws Exception{
 
 
-         Punto miPunto=null;
+         Galeria miPunto=null;
          CallableStatement ObjProcedimiento;
          Connection conector = estado();
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call ObtenerPunto(?)}") ;
-               ObjProcedimiento.setInt(1,IdPunto);
+               ObjProcedimiento=conector.prepareCall("{call ObtenerGaleria(?)}") ;
+               ObjProcedimiento.setInt(1,Idgaleria);
 
                ResultSet respuesta = ObjProcedimiento.executeQuery();
-               miPunto = new Punto();
+               miPunto = new Galeria();
                while(respuesta.next())  {
-                            miPunto.setIdPunto(respuesta.getInt(1));
-                            miPunto.setLatitud(respuesta.getFloat(2));
-                            miPunto.setLongitud(respuesta.getFloat(3));
+                            miPunto.setIdGaleria(respuesta.getInt(1));
+                            miPunto.setDescripcion(respuesta.getString(2));
+                            miPunto.setImagen(obtenerImagen(respuesta.getBlob(3)));
                                     }
 
          }catch(Exception pp)
@@ -76,7 +87,7 @@ public class CatalogoGaleria extends Conexion{
         return miPunto;
     }
 
-    public static int ExistePunto(int IdPunto) throws Exception{
+    public static int ExisteGaleria(int IdGaleria) throws Exception{
         int resultado=0;
 
          CallableStatement ObjProcedimiento;
@@ -84,15 +95,15 @@ public class CatalogoGaleria extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call ExistePunto(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdPunto);
+               ObjProcedimiento=conector.prepareCall("{call ExisteGaleria(?,?)}") ;
+               ObjProcedimiento.setInt(1,IdGaleria);
                ObjProcedimiento.registerOutParameter(2, Types.INTEGER);
                ObjProcedimiento.execute();
                resultado=ObjProcedimiento.getInt(2);
 
          }catch(Exception pp)
          {
-             JOptionPane.showMessageDialog(null,"Error en Catalogo: ExistePunto "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null,"Error en Catalogo: ExisteGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
          }finally{
              conector.close();
          }
@@ -101,7 +112,7 @@ public class CatalogoGaleria extends Conexion{
     }
 
    
-    public static boolean  EliminarPunto(int IdPunto) throws Exception{
+    public static boolean  EliminarGaleria(int IdGaleria) throws Exception{
         boolean resultado=false;
 
          CallableStatement ObjProcedimiento;
@@ -109,14 +120,14 @@ public class CatalogoGaleria extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call EliminarPunto(?)}") ;
-               ObjProcedimiento.setInt(1,IdPunto);
+               ObjProcedimiento=conector.prepareCall("{call EliminarGaleria(?)}") ;
+               ObjProcedimiento.setInt(1,IdGaleria);
                ObjProcedimiento.execute();
                resultado=true;
 
          }catch(Exception pp)
          {
-             JOptionPane.showMessageDialog(null,"Error en Catalogo:  EliminarPunto "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null,"Error en Catalogo:  EliminarGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
          }finally{
              conector.close();
          }
@@ -124,19 +135,19 @@ public class CatalogoGaleria extends Conexion{
         return resultado;
     }
 
-    public static ArrayList<Punto>  ListadoPunto() throws Exception{
+    public static ArrayList<Galeria>  ListadoGaleria() throws Exception{
 
-        ArrayList<Punto> lista = new ArrayList<Punto>();
+        ArrayList<Galeria> lista = new ArrayList<Galeria>();
          CallableStatement ObjProcedimiento;
          Connection conector = estado();
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call ListarPunto()}") ;
+               ObjProcedimiento=conector.prepareCall("{call ListarGaleria()}") ;
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        Punto miPunto = new Punto(respuesta.getInt(1),respuesta.getFloat(2),respuesta.getFloat(3));
+                        Galeria miPunto = new Galeria(respuesta.getInt(1),respuesta.getString(2),obtenerImagen(respuesta.getBlob(3)));
                         lista.add(miPunto);
 
                     } while(respuesta.next());
@@ -152,6 +163,40 @@ public class CatalogoGaleria extends Conexion{
          }
 
         return lista;
-    }*/
+    }
 
+    private static Image obtenerImagen(Blob blob) throws IOException, SQLException {
+        Image imagen=null;
+        imagen= javax.imageio.ImageIO.read(blob.getBinaryStream());
+        return imagen;
+    }
+
+    public static Blob convertirImagenABlob ( Image imagen ) {
+
+      Blob imagenBlob = null;
+      BufferedImage bi = new BufferedImage ( imagen.getWidth ( null ), imagen.getHeight ( null ), BufferedImage.TYPE_INT_ARGB );
+      Graphics bg = bi.getGraphics ();
+      bg.drawImage ( imagen, 0, 0, null );
+      bg.dispose ();
+
+      ByteArrayOutputStream baos = new ByteArrayOutputStream ();
+      try {
+         ImageIO.write (bi,"foto", baos );
+         baos.flush ();
+         baos.close ();
+      } catch ( IOException e ) {
+         e.printStackTrace ();
+      }
+
+      byte [] imagenByte = baos.toByteArray ();
+
+      try {
+         imagenBlob = new SerialBlob ( imagenByte );
+      } catch ( SerialException se ) {
+         se.printStackTrace ();
+      } catch ( SQLException sqle ) {
+         sqle.printStackTrace ();
+      }
+      return imagenBlob;
+   }
 }
