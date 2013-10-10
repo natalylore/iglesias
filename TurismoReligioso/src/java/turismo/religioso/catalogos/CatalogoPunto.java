@@ -28,10 +28,10 @@ public class CatalogoPunto extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call InsertarPunto(?,?,?)}") ;
-               ObjProcedimiento.setInt(1,miPunto.getIdPunto());
-               ObjProcedimiento.setFloat(2,miPunto.getLatitud());
-               ObjProcedimiento.setFloat(3,miPunto.getLongitud());
+               ObjProcedimiento=conector.prepareCall("{call InsertarPunto(?,?)}") ;
+    
+               ObjProcedimiento.setFloat(1,miPunto.getLatitud());
+               ObjProcedimiento.setFloat(2,miPunto.getLongitud());
                ObjProcedimiento.execute();
                resultado=true;
 
