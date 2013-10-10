@@ -16,9 +16,9 @@ public class Iglesia {
     private String horarioVisitas;
     private String horarioMisas;
     private String leyendas;
-    private Punto idPunto;
-    private Estilo idEstilo;
-    private Festividades idFestividades;
+    private Punto punto;
+    private Estilo estilo;
+    private Festividades festividades;
 
     public Iglesia() {
     }
@@ -31,9 +31,9 @@ public class Iglesia {
         this.horarioVisitas = horarioVisitas;
         this.horarioMisas = horarioMisas;
         this.leyendas = leyendas;
-        this.idPunto = idPunto;
-        this.idEstilo = idEstilo;
-        this.idFestividades = idFestividades;
+        this.punto = idPunto;
+        this.estilo = idEstilo;
+        this.festividades = idFestividades;
     }
 
     public int getIdIglesia() {
@@ -93,27 +93,27 @@ public class Iglesia {
     }
 
     public Punto getIdPunto() {
-        return idPunto;
+        return punto;
     }
 
     public void setIdPunto(Punto idPunto) {
-        this.idPunto = idPunto;
+        this.punto = idPunto;
     }
 
     public Estilo getIdEstilo() {
-        return idEstilo;
+        return estilo;
     }
 
     public void setIdEstilo(Estilo idEstilo) {
-        this.idEstilo = idEstilo;
+        this.estilo = idEstilo;
     }
 
     public Festividades getIdFestividades() {
-        return idFestividades;
+        return festividades;
     }
 
     public void setIdFestividades(Festividades idFestividades) {
-        this.idFestividades = idFestividades;
+        this.festividades = idFestividades;
     }
     
     
