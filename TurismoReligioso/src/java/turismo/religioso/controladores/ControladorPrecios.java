@@ -12,8 +12,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
-import turismo.religioso.catalogos.CatalogoPunto;
-import turismo.religioso.clases.Punto;
+import turismo.religioso.catalogos.CatalogoContactos;
+import turismo.religioso.catalogos.CatalogoPrecios;
+import turismo.religioso.clases.Contactos;
+import turismo.religioso.clases.Precios;
 
 /**
  *
@@ -21,24 +23,24 @@ import turismo.religioso.clases.Punto;
  */
 @ManagedBean
 @ViewScoped
-public class ControladorPunto {
+public class ControladorPrecios {
 
     /**
-     * Creates a new instance of ControladorPunto
+     * Creates a new instance of ControladorPrecios
      */
-    private  Punto objPunto;//objeto nuevo
-    private Punto objPuntoSeleccionado;
-    private ArrayList<Punto> ListaPunto;
-    public ControladorPunto() {
-        objPunto = new Punto();
-        CargarPunto();
+    private  Precios objPrecios;//objeto nuevo
+    private Precios objPrecioSeleccionado;
+    private ArrayList<Precios> ListaPrecio;
+    public ControladorPrecios() {
+        objPrecios = new Precios();
+        CargarPrecio();
     }
-       
-    private void CargarPunto(){
+    
+    private void CargarPrecio(){
         try {
-            ListaPunto = CatalogoPunto.ListadoPunto();
+            ListaPrecio = CatalogoPrecios.ListadoPrecios();
         } catch (Exception ex) {
-            Logger.getLogger(ControladorPunto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorPrecios.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //   public void Limpiar(){
@@ -48,20 +50,20 @@ public class ControladorPunto {
 //    }
     
       
-     public void insertarPunto() {
+     public void insertarPrecios() {
         try {
-            int dato = CatalogoPunto.ExistePunto(objPunto.getIdPunto());
+            int dato = CatalogoPrecios.ExistePrecio(objPrecios.getIdPrecio());
             
             if (dato<1) {
                 
                 
-                CatalogoPunto.InsertarPunto(objPunto);
+                CatalogoPrecios.InsertarPrecios(objPrecios);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarPrecio();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoCliente.hide()");
-                objPunto = new Punto();
+                objPrecios = new Precios();
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta!!", "El registro ya fue Insertado Anteriormente");
@@ -74,25 +76,24 @@ public class ControladorPunto {
         }
     }
 
-        public void eliminarPunto(){
+        public void eliminarPrecio(){
         try {
             
 //            if (CatalogoSector.EliminarSector(objSector)) {
-            //int dato = CatalogoPunto.ExistePunto(objPuntoSeleccionado.getIdPunto());
+            //int dato = CatalogoContactos.ExisteContacto(objPrecioSeleccionado.getIdContacto());
             
             //if (dato<1) {
                 
-               
-                CatalogoPunto.EliminarPunto(objPuntoSeleccionado.getIdPunto());
+                CatalogoPrecios.EliminarPrecios(objPrecioSeleccionado.getIdPrecio());
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Alerta!!", "Datos Eliminados");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarPrecio();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarCliente.hide()");
-                objPuntoSeleccionado = new Punto();
+                objPrecioSeleccionado = new Precios();
             /*} else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Alerta!!", "No se puede Eliminar al Punto porque tiene Registros Asignados");
+                        "Alerta!!", "No se puede Eliminar al Docente tiene Registros Asignados");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }*/
         } catch (Exception e) {
@@ -102,28 +103,28 @@ public class ControladorPunto {
         }        
     }
 
-    public Punto getObjPunto() {
-        return objPunto;
+    public Precios getObjPrecios() {
+        return objPrecios;
     }
 
-    public void setObjPunto(Punto objPunto) {
-        this.objPunto = objPunto;
+    public void setObjPrecios(Precios objPrecios) {
+        this.objPrecios = objPrecios;
     }
 
-    public Punto getObjPuntoSeleccionado() {
-        return objPuntoSeleccionado;
+    public Precios getObjPrecioSeleccionado() {
+        return objPrecioSeleccionado;
     }
 
-    public void setObjPuntoSeleccionado(Punto objPuntoSeleccionado) {
-        this.objPuntoSeleccionado = objPuntoSeleccionado;
+    public void setObjPrecioSeleccionado(Precios objPrecioSeleccionado) {
+        this.objPrecioSeleccionado = objPrecioSeleccionado;
     }
 
-    public ArrayList<Punto> getListaPunto() {
-        return ListaPunto;
+    public ArrayList<Precios> getListaPrecio() {
+        return ListaPrecio;
     }
 
-    public void setListaPunto(ArrayList<Punto> ListaPunto) {
-        this.ListaPunto = ListaPunto;
+    public void setListaPrecio(ArrayList<Precios> ListaPrecio) {
+        this.ListaPrecio = ListaPrecio;
     }
-        
+
 }

@@ -12,8 +12,8 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
-import turismo.religioso.catalogos.CatalogoPunto;
-import turismo.religioso.clases.Punto;
+import turismo.religioso.catalogos.CatalogoContactos;
+import turismo.religioso.clases.Contactos;
 
 /**
  *
@@ -21,24 +21,24 @@ import turismo.religioso.clases.Punto;
  */
 @ManagedBean
 @ViewScoped
-public class ControladorPunto {
+public class ControladorContactos {
 
     /**
-     * Creates a new instance of ControladorPunto
+     * Creates a new instance of ControladorContactos
      */
-    private  Punto objPunto;//objeto nuevo
-    private Punto objPuntoSeleccionado;
-    private ArrayList<Punto> ListaPunto;
-    public ControladorPunto() {
-        objPunto = new Punto();
-        CargarPunto();
+    private  Contactos objContacto;//objeto nuevo
+    private Contactos objContactoSeleccionado;
+    private ArrayList<Contactos> ListaContacto;
+    public ControladorContactos() {
+        objContacto = new Contactos();
+        CargarContacto();
     }
-       
-    private void CargarPunto(){
+    
+      private void CargarContacto(){
         try {
-            ListaPunto = CatalogoPunto.ListadoPunto();
+            ListaContacto = CatalogoContactos.ListadoContactos();
         } catch (Exception ex) {
-            Logger.getLogger(ControladorPunto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorContactos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //   public void Limpiar(){
@@ -48,20 +48,20 @@ public class ControladorPunto {
 //    }
     
       
-     public void insertarPunto() {
+     public void insertarContacto() {
         try {
-            int dato = CatalogoPunto.ExistePunto(objPunto.getIdPunto());
+            int dato = CatalogoContactos.ExisteContacto(objContacto.getIdContacto());
             
             if (dato<1) {
                 
                 
-                CatalogoPunto.InsertarPunto(objPunto);
+                CatalogoContactos.InsertarContacto(objContacto);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarContacto();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoCliente.hide()");
-                objPunto = new Punto();
+                objContacto = new Contactos();
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta!!", "El registro ya fue Insertado Anteriormente");
@@ -74,25 +74,24 @@ public class ControladorPunto {
         }
     }
 
-        public void eliminarPunto(){
+        public void eliminarContacto(){
         try {
             
 //            if (CatalogoSector.EliminarSector(objSector)) {
-            //int dato = CatalogoPunto.ExistePunto(objPuntoSeleccionado.getIdPunto());
+           // int dato = CatalogoContactos.ExisteContacto(objContactoSeleccionado.getIdContacto());
             
-            //if (dato<1) {
+           // if (dato<1) {
                 
-               
-                CatalogoPunto.EliminarPunto(objPuntoSeleccionado.getIdPunto());
+                CatalogoContactos.EliminarContacto(objContactoSeleccionado.getIdContacto());
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Alerta!!", "Datos Eliminados");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarContacto();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarCliente.hide()");
-                objPuntoSeleccionado = new Punto();
+                objContactoSeleccionado = new Contactos();
             /*} else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Alerta!!", "No se puede Eliminar al Punto porque tiene Registros Asignados");
+                        "Alerta!!", "No se puede Eliminar al Contacto tiene Registros Asignados");
                 FacesContext.getCurrentInstance().addMessage(null, message);
             }*/
         } catch (Exception e) {
@@ -102,28 +101,28 @@ public class ControladorPunto {
         }        
     }
 
-    public Punto getObjPunto() {
-        return objPunto;
+    public Contactos getObjContacto() {
+        return objContacto;
     }
 
-    public void setObjPunto(Punto objPunto) {
-        this.objPunto = objPunto;
+    public void setObjContacto(Contactos objContacto) {
+        this.objContacto = objContacto;
     }
 
-    public Punto getObjPuntoSeleccionado() {
-        return objPuntoSeleccionado;
+    public Contactos getObjContactoSeleccionado() {
+        return objContactoSeleccionado;
     }
 
-    public void setObjPuntoSeleccionado(Punto objPuntoSeleccionado) {
-        this.objPuntoSeleccionado = objPuntoSeleccionado;
+    public void setObjContactoSeleccionado(Contactos objContactoSeleccionado) {
+        this.objContactoSeleccionado = objContactoSeleccionado;
     }
 
-    public ArrayList<Punto> getListaPunto() {
-        return ListaPunto;
+    public ArrayList<Contactos> getListaContacto() {
+        return ListaContacto;
     }
 
-    public void setListaPunto(ArrayList<Punto> ListaPunto) {
-        this.ListaPunto = ListaPunto;
+    public void setListaContacto(ArrayList<Contactos> ListaContacto) {
+        this.ListaContacto = ListaContacto;
     }
         
 }
