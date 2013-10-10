@@ -61,7 +61,7 @@ public class CatalogoIglesiaGaleria extends Conexion{
                miIglesiaGaleria = new IglesiaGaleria();
                while(respuesta.next())  {
                             miIglesiaGaleria.setIglesia(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)));
-                            //miIglesiaGaleria.setGaleria(CatalogoGaleria.Obtener (respuesta.getInt(2)));
+                            miIglesiaGaleria.setGaleria(CatalogoGaleria.ObtenerGaleria(respuesta.getInt(2)));
                          
                                     }
 
@@ -137,8 +137,8 @@ public class CatalogoIglesiaGaleria extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                       // IglesiaGaleria miIglesiaGaleria = new IglesiaGaleria(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoGaleria.   (respuesta.getInt(2)));
-                        //lista.add(miIglesiaGaleria);
+                        IglesiaGaleria miIglesiaGaleria = new IglesiaGaleria(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoGaleria.ObtenerGaleria(respuesta.getInt(2)));
+                        lista.add(miIglesiaGaleria);
 
                     } while(respuesta.next());
 
