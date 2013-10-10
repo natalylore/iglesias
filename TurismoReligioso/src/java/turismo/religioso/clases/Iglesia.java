@@ -11,6 +11,7 @@ package turismo.religioso.clases;
 public class Iglesia {
     private int idIglesia;
     private String nombre;
+    private String direccion;
     private String descripcion;
     private String historia;
     private String horarioVisitas;
@@ -23,17 +24,18 @@ public class Iglesia {
     public Iglesia() {
     }
 
-    public Iglesia(int idIglesia, String nombre, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, Punto idPunto, Estilo idEstilo, Festividades idFestividades) {
+    public Iglesia(int idIglesia, String nombre, String direccion, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, Punto punto, Estilo estilo, Festividades festividades) {
         this.idIglesia = idIglesia;
         this.nombre = nombre;
+        this.direccion = direccion;
         this.descripcion = descripcion;
         this.historia = historia;
         this.horarioVisitas = horarioVisitas;
         this.horarioMisas = horarioMisas;
         this.leyendas = leyendas;
-        this.punto = idPunto;
-        this.estilo = idEstilo;
-        this.festividades = idFestividades;
+        this.punto = punto;
+        this.estilo = estilo;
+        this.festividades = festividades;
     }
 
     public int getIdIglesia() {
@@ -50,6 +52,14 @@ public class Iglesia {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     public String getDescripcion() {
@@ -92,29 +102,27 @@ public class Iglesia {
         this.leyendas = leyendas;
     }
 
-    public Punto getIdPunto() {
+    public Punto getPunto() {
         return punto;
     }
 
-    public void setIdPunto(Punto idPunto) {
-        this.punto = idPunto;
+    public void setPunto(Punto punto) {
+        this.punto = punto;
     }
 
-    public Estilo getIdEstilo() {
+    public Estilo getEstilo() {
         return estilo;
     }
 
-    public void setIdEstilo(Estilo idEstilo) {
-        this.estilo = idEstilo;
+    public void setEstilo(Estilo estilo) {
+        this.estilo = estilo;
     }
 
-    public Festividades getIdFestividades() {
+    public Festividades getFestividades() {
         return festividades;
     }
 
-    public void setIdFestividades(Festividades idFestividades) {
-        this.festividades = idFestividades;
-    }
-    
-    
+    public void setFestividades(Festividades festividades) {
+        this.festividades = festividades;
+    } 
 }
