@@ -20,7 +20,7 @@ import static turismo.religioso.conexion.Conexion.estado;
  *
  * @author Checho
  */
-public class CatalogoPrecios extends Conexion{
+public class CatalogoServicios extends Conexion{
      public static boolean  InsertarServicios(Servicios miServicio) throws Exception{
         boolean resultado=false;
 
