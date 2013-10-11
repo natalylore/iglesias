@@ -101,4 +101,29 @@ public class ControladorIglesiaFestividad {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
+
+    public IglesiaFestividad getObjIglesiaFestividad() {
+        return objIglesiaFestividad;
+    }
+
+    public void setObjIglesiaFestividad(IglesiaFestividad objIglesiaFestividad) {
+        this.objIglesiaFestividad = objIglesiaFestividad;
+    }
+
+    public IglesiaFestividad getObjIglesiaFestividadSeleccionado() {
+        return objIglesiaFestividadSeleccionado;
+    }
+
+    public void setObjIglesiaFestividadSeleccionado(IglesiaFestividad objIglesiaFestividadSeleccionado) {
+        this.objIglesiaFestividadSeleccionado = objIglesiaFestividadSeleccionado;
+    }
+
+    public ArrayList<IglesiaFestividad> getListaFestividadSeleccionado() {
+        return ListaFestividadSeleccionado;
+    }
+
+    public void setListaFestividadSeleccionado(ArrayList<IglesiaFestividad> ListaFestividadSeleccionado) {
+        this.ListaFestividadSeleccionado = ListaFestividadSeleccionado;
+    }
+        
 }
