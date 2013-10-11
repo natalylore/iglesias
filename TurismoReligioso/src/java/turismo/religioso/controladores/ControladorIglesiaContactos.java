@@ -101,4 +101,30 @@ public class ControladorIglesiaContactos {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
+
+    public IglesiaContactos getObjIglesiaContactos() {
+        return objIglesiaContactos;
+    }
+
+    public void setObjIglesiaContactos(IglesiaContactos objIglesiaContactos) {
+        this.objIglesiaContactos = objIglesiaContactos;
+    }
+
+    public IglesiaContactos getObjIglesiaContactosSeleccionado() {
+        return objIglesiaContactosSeleccionado;
+    }
+
+    public void setObjIglesiaContactosSeleccionado(IglesiaContactos objIglesiaContactosSeleccionado) {
+        this.objIglesiaContactosSeleccionado = objIglesiaContactosSeleccionado;
+    }
+
+    public ArrayList<IglesiaContactos> getListaContactosSeleccionado() {
+        return ListaContactosSeleccionado;
+    }
+
+    public void setListaContactosSeleccionado(ArrayList<IglesiaContactos> ListaContactosSeleccionado) {
+        this.ListaContactosSeleccionado = ListaContactosSeleccionado;
+    }
+        
+    
 }
