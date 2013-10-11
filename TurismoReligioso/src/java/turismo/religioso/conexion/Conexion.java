@@ -37,7 +37,7 @@ public class Conexion {
                //host=ip;
                // JOptionPane.showMessageDialog(null,"direccion "+ip);
 
-                String ulrjdbc = "jdbc:postgresql://"+host+":"+puerto+"/"+base;
+                String ulrjdbc = "jdbc:mysql://"+host+":"+puerto+"/"+base;
 
 		try {
 			 Class.forName(driver).newInstance();

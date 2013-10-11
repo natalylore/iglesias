@@ -48,7 +48,7 @@ public class ControladorFestividades {
 //    }
     
       
-     public void insertarPrecios() {
+     public void insertarFestividades() {
         try {
             int dato = CatalogoFestividades.ExisteFestividad(objFestividades.getIdFestividades());
             

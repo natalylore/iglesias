@@ -85,7 +85,7 @@ public class CatalogoContactos extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call ExisteContacto(?,?)}") ;
+               ObjProcedimiento=conector.prepareCall("{call ExisteContactos(?,?)}") ;
                ObjProcedimiento.setInt(1,IdContacto);
                ObjProcedimiento.registerOutParameter(2, Types.INTEGER);
                ObjProcedimiento.execute();

@@ -134,8 +134,8 @@ public class CatalogoEstilo extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        Estilo miPunto = new Estilo (respuesta.getInt(1),respuesta.getString(2));
-                        lista.add(miPunto);
+                        Estilo miEstilo = new Estilo (respuesta.getInt(1),respuesta.getString(2));
+                        lista.add(miEstilo);
 
                     } while(respuesta.next());
 
