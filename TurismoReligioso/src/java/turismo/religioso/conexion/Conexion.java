@@ -19,7 +19,7 @@ public class Conexion {
     
           static String usuario = "root";
           static String password = "123456";
-          static String host = "localhost";
+          static String host = "192.168.0.106";
 
 
           static String puerto = "3306";
