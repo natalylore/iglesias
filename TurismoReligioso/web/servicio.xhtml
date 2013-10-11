@@ -38,11 +38,10 @@
                          </p:submenu >
                             <p:submenu label="Administracion">
                                <p:menuitem value=" Administrar Estilos" url="/faces/estilo.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Contactos"  url="/faces/contacto.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Festividades"  url="/faces/festividades.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Precios"  url="/faces/precios.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Puntos"  url="/faces/punto.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Servicios"  url="/faces/servicio.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Docentes"  url="/faces/docentes.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Horarios"  url="/faces/horarios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Materias"  url="/faces/materias.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Usuarios"  url="/faces/usuarios.xhtml" icon="ui-icon-document"/>
                                 
                          </p:submenu >
                          <p:submenu label="Control">
@@ -64,25 +63,25 @@
 
                     <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
                    <h:form id="frmClientes">
-                       <p:dataTable id="tblClientes" value="#{controladorServicios.listaServicio}" 
+                       <p:dataTable id="tblClientes" value="#{controladorServicio.listaServicios}" 
                                     var="servicio" rowKey="#{servicio.idServicio}"
                              selectionMode="single" 
-                             selection="#{controladorServicios.objServicioSeleccionado}"
+                             selection="#{controladorServicio.objServicioSeleccionado}"
                               paginator="true" rows="10"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                  rowsPerPageTemplate="5,10,15">
                            
                             <f:facet name="header">
                                     
-                     <h2>Listado de Servicios</h2>  
+                                    <h2>Listado de Servicios</h2>  
                             </f:facet>
                            <p:column headerText="Codigo" sortBy="#{servicio.idServicio}" filterBy="#{servicio.idServicio}">
                                <h:outputText value="#{servicio.idServicio}"/>
                     </p:column>                     
-                           <p:column headerText="Nombre" sortBy="#{servicio.nombre}" filterBy="#{servicio.nombre}">
+                           <p:column headerText="Nombre"  filterBy="#{servicio.nombre}">
                                <h:outputText value="#{servicio.nombre}"/>
-                    </p:column>                     
-                                                  
+                    </p:column>
+                       
                     <f:facet name="footer">
                         <p:commandButton id="btnNuevo" value="Nuevo"
                                          onclick="wdlgNuevoCliente.show();"
@@ -108,12 +107,13 @@
                         <p:panelGrid id="pngCliente" columns="2">
                                                 
                         <h:outputText value="Nombre"/>
-                        <p:inputText id="txtNombre" value="#{controladorServicios.objServicio.nombre}"  onkeyup="this.value=this.value.toUpperCase();"/>
-                                                
+                        <p:inputText id="txtNombre" value="#{controladorServicio.objServicios.nombre}"  onkeyup="this.value=this.value.toUpperCase();"/>
+                        
+                       
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnNuevoCliente" value="Guardar"
-                                     action="#{controladorServicios.insertarServicio()}"
+                                     action="#{controladorServicio.insertarServicio()}"
                                      update=":frmClientes:tblClientes"/>
                     <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();" actionListener="#{controladorDocente.limpiar}"/>
                 </h:form>
@@ -126,13 +126,14 @@
                 <h:form id="frmEliminarCliente">
                     <p:panelGrid id="pngEliminarCliente" columns="2">
                          <h:outputText value="Codigo"/>
-                         <p:inputText value="#{controladorServicios.objServicioSeleccionado.idServicio}" disabled="true"/>
+                         <p:inputText value="#{controladorServicio.objServicioSeleccionado.idServicio}" disabled="true"/>
                         <h:outputText value="Nombre"/>
-                        <p:inputText value="#{controladorServicios.objServicioSeleccionado.nombre}" disabled="true"/>
+                        <p:inputText value="#{controladorServicio.objServicioSeleccionado.nombre}" disabled="true"/>
+                        
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnEliminarCliente" value="Aceptar"
-                                     action="#{controladorServicios.eliminarServicios()}"
+                                     action="#{controladorServicio.eliminarServicio()}"
                                      update=":frmClientes:tblClientes"/>
                     <p:commandButton id="btnCancelarEliminar" value="Cancelar"
                                      onclick="wdlgEliminarCliente.hide();"/>

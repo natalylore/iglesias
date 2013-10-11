@@ -9,54 +9,59 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
 import turismo.religioso.catalogos.CatalogoServicios;
 import turismo.religioso.clases.Servicios;
 
-
 /**
  *
- * @author Fmla Jimenez
+ * @author Checho
  */
 @ManagedBean
-@RequestScoped
-public class ControladorServicios {
+@ViewScoped
+public class ControladorServicio {
 
     /**
-     * Creates a new instance of ControladorServicios
+     * Creates a new instance of ControladorServicio
      */
-    private  Servicios objServicio;//objeto nuevo
+    private  Servicios objServicios;//objeto nuevo
     private Servicios objServicioSeleccionado;
-    private ArrayList<Servicios> ListaServicio;
-    public ControladorServicios() {
-        objServicio = new Servicios();
-        CargarPunto();
+    private ArrayList<Servicios> ListaServicios;
+    public ControladorServicio() {
+        objServicios = new Servicios();
+        CargarServicios();
     }
-       
-    private void CargarPunto(){
+   
+    private void CargarServicios(){
         try {
-            ListaServicio = CatalogoServicios.ListadoServicios();
+            ListaServicios = CatalogoServicios.ListadoServicios();
         } catch (Exception ex) {
-            Logger.getLogger(ControladorPunto.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+//   public void Limpiar(){
+//       FacesContext contexto=FacesContext.getCurrentInstance();
+//        RequestContext.getCurrentInstance().reset("dlgNuevoCliente:frmNuevoCliente:pngCliente");  
+//        
+//    }
+    
+      
      public void insertarServicio() {
         try {
-            int dato = CatalogoServicios.ExisteServicio(objServicio.getIdServicio());
+            int dato = CatalogoServicios.ExisteServicio(objServicios.getIdServicio());
             
             if (dato<1) {
                 
                 
-                CatalogoServicios.InsertarServicios(objServicio);
+                CatalogoServicios.InsertarServicios(objServicios);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarServicios();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoCliente.hide()");
-                objServicio = new Servicios();
+                objServicios = new Servicios();
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta!!", "El registro ya fue Insertado Anteriormente");
@@ -68,28 +73,27 @@ public class ControladorServicios {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-//
-        public void eliminarServicios(){
+
+        public void eliminarServicio(){
         try {
             
 //            if (CatalogoSector.EliminarSector(objSector)) {
-//            int dato = CatalogoServicios.ExisteServicio(objPuntoSeleccionado.getIdServicio());
-//            
-//            if (dato<1) {
+            //int dato = CatalogoContactos.ExisteContacto(objPrecioSeleccionado.getIdContacto());
+            
+            //if (dato<1) {
                 
-               
                 CatalogoServicios.EliminarServicios(objServicioSeleccionado.getIdServicio());
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "Alerta!!", "Datos Eliminados");
                 FacesContext.getCurrentInstance().addMessage(null, message);
-                CargarPunto();
+                CargarServicios();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgEliminarCliente.hide()");
                 objServicioSeleccionado = new Servicios();
-//            } else {
-//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-//                        "Alerta!!", "No se puede Eliminar el servicio tiene Registros Asignados");
-//                FacesContext.getCurrentInstance().addMessage(null, message);
-//            }
+            /*} else {
+                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                        "Alerta!!", "No se puede Eliminar al Docente tiene Registros Asignados");
+                FacesContext.getCurrentInstance().addMessage(null, message);
+            }*/
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Alerta!!", e.getMessage());
@@ -97,12 +101,12 @@ public class ControladorServicios {
         }        
     }
 
-    public Servicios getObjServicio() {
-        return objServicio;
+    public Servicios getObjServicios() {
+        return objServicios;
     }
 
-    public void setObjServicio(Servicios objServicio) {
-        this.objServicio = objServicio;
+    public void setObjServicios(Servicios objServicios) {
+        this.objServicios = objServicios;
     }
 
     public Servicios getObjServicioSeleccionado() {
@@ -113,13 +117,12 @@ public class ControladorServicios {
         this.objServicioSeleccionado = objServicioSeleccionado;
     }
 
-    public ArrayList<Servicios> getListaServicio() {
-        return ListaServicio;
+    public ArrayList<Servicios> getListaServicios() {
+        return ListaServicios;
     }
 
-    public void setListaServicio(ArrayList<Servicios> ListaServicio) {
-        this.ListaServicio = ListaServicio;
+    public void setListaServicios(ArrayList<Servicios> ListaServicios) {
+        this.ListaServicios = ListaServicios;
     }
-       
-        
-}
+
+   }

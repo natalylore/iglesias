@@ -9,24 +9,30 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import turismo.religioso.clases.Estilo;
 import turismo.religioso.clases.Galeria;
+import turismo.religioso.clases.Servicios;
 
 /**
  *
  * @author Checho
  */
 public class pruebas {
-    public static void main(String args[])
+    public static void main(String args[]) 
  
     {
         try {
-            ArrayList<Galeria> lista=CatalogoGaleria.ListadoGaleria();
-            for (Galeria galeria : lista) {
-                System.out.println(galeria.getDescripcion());
-            }
+            //        try {
+            //            ArrayList<Servicios> lista=CatalogoServicios.ListadoServicios();
+            //            for (Servicios galeria : lista) {
+            //                System.out.println(galeria.getNombre());
+            //            }
+            //        } catch (Exception ex) {
+            //            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
+            //        }
+
+                    CatalogoServicios.EliminarServicios(5);
         } catch (Exception ex) {
-            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error"+ ex.getMessage());
         }
-        
  
     }
 }
