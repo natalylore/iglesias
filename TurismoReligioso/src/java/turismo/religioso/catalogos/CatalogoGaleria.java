@@ -79,7 +79,7 @@ public class CatalogoGaleria extends Conexion{
 
          }catch(Exception pp)
          {
-             JOptionPane.showMessageDialog(null,"Error en Catalogo: ObtenerPunto "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null,"Error en Catalogo: ObtenerGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
          }finally{
              conector.close();
          }
@@ -157,7 +157,7 @@ public class CatalogoGaleria extends Conexion{
 
          }catch(Exception pp)
          {
-             JOptionPane.showMessageDialog(null,"Error en Catalogo: ListadoPunto "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
+             JOptionPane.showMessageDialog(null,"Error en Catalogo: ListadoGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);
          }finally{
              conector.close();
          }
