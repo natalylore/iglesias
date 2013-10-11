@@ -28,7 +28,7 @@ public class CatalogoIglesia extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call InsertarIglesia(?,?,?,?,?,?,?,?,?,?)}") ;
+               ObjProcedimiento=conector.prepareCall("{call InsertarIglesia(?,?,?,?,?,?,?,?,?)}") ;
                ObjProcedimiento.setString(1,miIglesia.getNombre());
                ObjProcedimiento.setString(2,miIglesia.getDireccion());
                ObjProcedimiento.setString(3,miIglesia.getDescripcion());
@@ -38,7 +38,6 @@ public class CatalogoIglesia extends Conexion{
                ObjProcedimiento.setString(7,miIglesia.getLeyendas());
                ObjProcedimiento.setInt(8,miIglesia.getPunto().getIdPunto());
                ObjProcedimiento.setInt(9,miIglesia.getEstilo().getIdEstilo());
-               ObjProcedimiento.setInt(10,miIglesia.getFestividades().getIdFestividades());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -77,7 +76,7 @@ public class CatalogoIglesia extends Conexion{
                             miIglesia.setLeyendas(respuesta.getString(8));
                             miIglesia.setPunto(CatalogoPunto.ObtenerPunto(respuesta.getInt(9)));
                             miIglesia.setEstilo(CatalogoEstilo.ObtenerEstilo(respuesta.getInt(10)));
-                            miIglesia.setFestividades(CatalogoFestividades.ObtenerFestividades(respuesta.getInt(11)));
+                            
                             
                                     }
 
@@ -151,7 +150,7 @@ public class CatalogoIglesia extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        Iglesia miIglesia = new Iglesia(respuesta.getInt(1),respuesta.getString(2),respuesta.getString(3),respuesta.getString(4),respuesta.getString(5),respuesta.getString(6),respuesta.getString(7),respuesta.getString(8),CatalogoPunto.ObtenerPunto(respuesta.getInt(9)), CatalogoEstilo.ObtenerEstilo(respuesta.getInt(10)),CatalogoFestividades.ObtenerFestividades(respuesta.getInt(11)));
+                        Iglesia miIglesia = new Iglesia(respuesta.getInt(1),respuesta.getString(2),respuesta.getString(3),respuesta.getString(4),respuesta.getString(5),respuesta.getString(6),respuesta.getString(7),respuesta.getString(8),CatalogoPunto.ObtenerPunto(respuesta.getInt(9)), CatalogoEstilo.ObtenerEstilo(respuesta.getInt(10)));
                         lista.add(miIglesia);
 
                     } while(respuesta.next());

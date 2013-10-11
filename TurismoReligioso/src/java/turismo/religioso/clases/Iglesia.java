@@ -19,12 +19,11 @@ public class Iglesia {
     private String leyendas;
     private Punto punto;
     private Estilo estilo;
-    private Festividades festividades;
-
+    
     public Iglesia() {
     }
 
-    public Iglesia(int idIglesia, String nombre, String direccion, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, Punto punto, Estilo estilo, Festividades festividades) {
+    public Iglesia(int idIglesia, String nombre, String direccion, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, Punto punto, Estilo estilo) {
         this.idIglesia = idIglesia;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -35,7 +34,7 @@ public class Iglesia {
         this.leyendas = leyendas;
         this.punto = punto;
         this.estilo = estilo;
-        this.festividades = festividades;
+        
     }
 
     public int getIdIglesia() {
@@ -118,11 +117,4 @@ public class Iglesia {
         this.estilo = estilo;
     }
 
-    public Festividades getFestividades() {
-        return festividades;
-    }
-
-    public void setFestividades(Festividades festividades) {
-        this.festividades = festividades;
-    } 
-}
+ }
