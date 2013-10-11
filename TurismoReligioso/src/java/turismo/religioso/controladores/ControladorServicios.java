@@ -96,6 +96,30 @@ public class ControladorServicios {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-        
+
+    public Servicios getObjServicio() {
+        return objServicio;
+    }
+
+    public void setObjServicio(Servicios objServicio) {
+        this.objServicio = objServicio;
+    }
+
+    public Servicios getObjServicioSeleccionado() {
+        return objServicioSeleccionado;
+    }
+
+    public void setObjServicioSeleccionado(Servicios objServicioSeleccionado) {
+        this.objServicioSeleccionado = objServicioSeleccionado;
+    }
+
+    public ArrayList<Servicios> getListaServicio() {
+        return ListaServicio;
+    }
+
+    public void setListaServicio(ArrayList<Servicios> ListaServicio) {
+        this.ListaServicio = ListaServicio;
+    }
+       
         
 }
