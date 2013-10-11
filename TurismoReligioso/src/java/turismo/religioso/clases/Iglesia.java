@@ -17,13 +17,13 @@ public class Iglesia {
     private String horarioVisitas;
     private String horarioMisas;
     private String leyendas;
-    private Punto punto;
-    private Estilo estilo;
+    private int punto;
+    private int estilo;
     
     public Iglesia() {
     }
 
-    public Iglesia(int idIglesia, String nombre, String direccion, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, Punto punto, Estilo estilo) {
+    public Iglesia(int idIglesia, String nombre, String direccion, String descripcion, String historia, String horarioVisitas, String horarioMisas, String leyendas, int punto, int estilo) {
         this.idIglesia = idIglesia;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -34,9 +34,9 @@ public class Iglesia {
         this.leyendas = leyendas;
         this.punto = punto;
         this.estilo = estilo;
-        
     }
 
+    
     public int getIdIglesia() {
         return idIglesia;
     }
@@ -97,24 +97,30 @@ public class Iglesia {
         return leyendas;
     }
 
-    public void setLeyendas(String leyendas) {
-        this.leyendas = leyendas;
-    }
-
-    public Punto getPunto() {
+    public int getPunto() {
         return punto;
     }
 
-    public void setPunto(Punto punto) {
+    public void setPunto(int punto) {
         this.punto = punto;
     }
 
-    public Estilo getEstilo() {
+    public int getEstilo() {
         return estilo;
     }
 
-    public void setEstilo(Estilo estilo) {
+    public void setEstilo(int estilo) {
         this.estilo = estilo;
+    }
+
+    public void setLeyendas(String leyendas) {
+        this.leyendas = leyendas;
+    }
+ 
+
+    @Override
+    public String toString() {
+        return "Iglesia{" + "idIglesia=" + idIglesia + ", nombre=" + nombre + ", direccion=" + direccion + ", descripcion=" + descripcion + ", historia=" + historia + ", horarioVisitas=" + horarioVisitas + ", horarioMisas=" + horarioMisas + ", leyendas=" + leyendas + ", punto=" + punto + ", estilo=" + estilo + '}';
     }
 
  }

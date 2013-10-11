@@ -97,6 +97,7 @@ public class ControladorEstilo {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
+   
 
     public Estilo getObjEstilo() {
         return objEstilo;

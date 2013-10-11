@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import turismo.religioso.clases.Estilo;
 import turismo.religioso.clases.Galeria;
+import turismo.religioso.clases.Iglesia;
 import turismo.religioso.clases.Servicios;
 
 /**
@@ -29,7 +30,9 @@ public class pruebas {
             //            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
             //        }
 
-                    CatalogoServicios.EliminarServicios(5);
+           //         CatalogoServicios.EliminarServicios(5);
+            Iglesia objIglesia=new Iglesia(8, "a", "a", "a", "a", "a", "a","a", 3, 1);
+            CatalogoIglesia.InsertarIglesia(objIglesia);
         } catch (Exception ex) {
             System.out.println("error"+ ex.getMessage());
         }

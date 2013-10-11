@@ -13,7 +13,10 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
 import turismo.religioso.catalogos.CatalogoIglesia;
+import turismo.religioso.catalogos.CatalogoPunto;
 import turismo.religioso.clases.Iglesia;
+import turismo.religioso.clases.Punto;
+
 
 /**
  *
@@ -21,24 +24,24 @@ import turismo.religioso.clases.Iglesia;
  */
 @ManagedBean
 @ViewScoped
-public class ControladorIglesia {
+public class ControladorIglesias {
 
     /**
-     * Creates a new instance of ControladorIglesia
+     * Creates a new instance of ControladorIglesias
      */
-    private  Iglesia objIglesia;//objeto nuevo
+    private  Iglesia objIglesias;//objeto nuevo
     private Iglesia objIglesiaSeleccionado;
     private ArrayList<Iglesia> ListaIglesia;
-    public ControladorIglesia() {
-         objIglesia = new Iglesia();
+    public ControladorIglesias() {
+        objIglesias = new Iglesia();
         CargarIglesia();
     }
-   
+
     private void CargarIglesia(){
         try {
             ListaIglesia = CatalogoIglesia.ListadoIglesia();
         } catch (Exception ex) {
-            Logger.getLogger(ControladorIglesia.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorIglesias.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 //   public void Limpiar(){
@@ -49,18 +52,20 @@ public class ControladorIglesia {
     
       
      public void insertarIglesia() {
+         int dato=0;
         try {
-            int dato = CatalogoIglesia.ExisteIglesia(objIglesia.getIdIglesia());
+             dato = CatalogoIglesia.ExisteIglesia(objIglesias.getIdIglesia());
             
             if (dato<1) {
                 
-                CatalogoIglesia.InsertarIglesia(objIglesia);
+                
+                CatalogoIglesia.InsertarIglesia(objIglesias);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
                 FacesContext.getCurrentInstance().addMessage(null, message);
                 CargarIglesia();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoCliente.hide()");
-                objIglesia = new Iglesia();
+                objIglesias = new Iglesia();
             } else {
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                         "Alerta!!", "El registro ya fue Insertado Anteriormente");
@@ -68,7 +73,7 @@ public class ControladorIglesia {
             }
         } catch (Exception e) {
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Alerta!!", e.getMessage());
+                    "Alerta!!"+ dato, e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
@@ -99,13 +104,24 @@ public class ControladorIglesia {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-
-    public Iglesia getObjIglesia() {
-        return objIglesia;
+public String ObtenerPunto(int id){
+       String cadena="";
+        try {
+            
+            Punto obj = CatalogoPunto.ObtenerPunto(id);
+            cadena= "LAT: "+obj.getLatitud()+"  LON: "+ obj.getLongitud();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(ControladorIglesias.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    } 
+    public Iglesia getObjIglesias() {
+        return objIglesias;
     }
 
-    public void setObjIglesia(Iglesia objIglesia) {
-        this.objIglesia = objIglesia;
+    public void setObjIglesias(Iglesia objIglesias) {
+        this.objIglesias = objIglesias;
     }
 
     public Iglesia getObjIglesiaSeleccionado() {
@@ -123,5 +139,5 @@ public class ControladorIglesia {
     public void setListaIglesia(ArrayList<Iglesia> ListaIglesia) {
         this.ListaIglesia = ListaIglesia;
     }
-        
+
 }
