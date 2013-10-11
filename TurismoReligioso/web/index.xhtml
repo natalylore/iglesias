@@ -1,14 +1,87 @@
-<?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
-    <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
-    </h:body>
-</html>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      lang="es">
 
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>PrimeFaces</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="275"  >
+                  <div>
+                    <p:graphicImage value="/imagenes/iglesia1.jpg"  width="100%"/> 
+                    </div>   
+                   
+                </p:layoutUnit>
+                
+                <p:layoutUnit position="east" size="350" header="Calendario" resizable="true" closable="true" collapsible="true"
+                              style="text-align:center">
+                    <br />
+                            <p:calendar mode="inline" navigator="none"/>
+                            
+                            <p:stack icon="/imagenes/stack0.png">
+                            <p:menuitem value="Terminar" icon="/imagenes/stack1.png" url="#"/>
+                            <p:menuitem value="Contactos" icon="/imagenes/stack2.png" url="#"/>
+                            <p:menuitem value="Acerca" icon="/imagenes/stack3.png" url="#"/>
+                            
+                    </p:stack>
+                 
+                </p:layoutUnit>
+                <p:layoutUnit position="south" size="50" footer="ESPOCH - ESCUELA DE SISTEMAS" style="text-align:center" >
+                    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="410" header="Menu" >
+                    <p:panelMenu style="width:400px">
+                         <p:submenu label="Administracion">
+                                <p:menuitem value=" Administrar Laboratorios" url="/faces/laboratorios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Docentes"  url="/faces/docentes.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Horarios"  url="/faces/horarios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Materias"  url="/faces/materias.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Usuarios"  url="/faces/usuarios.xhtml" icon="ui-icon-document"/>
+                                  </p:submenu >
+                         <p:submenu label="Control">
+                                <p:menuitem value="Asignacion de Laboratorios" url="/faces/asignacion.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
+                         </p:submenu >
+                         <p:submenu label="Informes">
+                             <p:menuitem value="Reportes" url="/faces/reportes.xhtml" icon="ui-icon-document"/>
+                                
+                         </p:submenu >
+                         
+                            <p:submenu label="Opciones">
+                             <p:menuitem value="Salir Sesion"  actionListener="#{controladorAutenticacio.logout()}" oncomplete="logout(xhr, status, args)"  url="/faces/index.xhtml" icon="ui-icon-document"/>
+                                
+                         </p:submenu >
+                         
+
+                         
+                    </p:panelMenu>
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center" >
+                    
+                            <h3>GALERIA DE IMAGENES</h3>
+                            <p:galleria value="#{controladorGaleria.images}" var="image" panelWidth="800" panelHeight="400"  style="alignment-adjust: 200px">
+                        <p:graphicImage value="/imagenes/#{image}" alt="Imagen de laboratorio " />
+                    </p:galleria>
+                        
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
