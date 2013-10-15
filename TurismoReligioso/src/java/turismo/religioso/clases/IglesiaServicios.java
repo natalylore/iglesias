@@ -9,31 +9,32 @@ package turismo.religioso.clases;
  * @author Fmla Jimenez
  */
 public class IglesiaServicios {
-    private Iglesia iglesia;
-    private Servicios servicio;
+    private int iglesia;
+    private int servicio;
 
     public IglesiaServicios() {
     }
 
-    public IglesiaServicios(Iglesia iglesia, Servicios servicio) {
+    public IglesiaServicios(int iglesia, int servicio) {
         this.iglesia = iglesia;
         this.servicio = servicio;
     }
 
-    public Iglesia getIglesia() {
+    public int getIglesia() {
         return iglesia;
     }
 
-    public void setIglesia(Iglesia iglesia) {
+    public void setIglesia(int iglesia) {
         this.iglesia = iglesia;
     }
 
-    public Servicios getServicio() {
+    public int getServicio() {
         return servicio;
     }
 
-    public void setServicio(Servicios servicio) {
+    public void setServicio(int servicio) {
         this.servicio = servicio;
     }
-    
+
+ 
 }

@@ -7,10 +7,12 @@ package turismo.religioso.catalogos;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import turismo.religioso.clases.Estilo;
-import turismo.religioso.clases.Galeria;
-import turismo.religioso.clases.Iglesia;
-import turismo.religioso.clases.Servicios;
+import turismo.religioso.clases.Festividades;
+import turismo.religioso.clases.IglesiaContactos;
+import turismo.religioso.clases.IglesiaFestividad;
+import turismo.religioso.clases.IglesiaPrecio;
+import turismo.religioso.controladores.ControladorIglesiaFestividad;
+
 
 /**
  *
@@ -20,22 +22,15 @@ public class pruebas {
     public static void main(String args[]) 
  
     {
+       String cadena="";
         try {
-            //        try {
-            //            ArrayList<Servicios> lista=CatalogoServicios.ListadoServicios();
-            //            for (Servicios galeria : lista) {
-            //                System.out.println(galeria.getNombre());
-            //            }
-            //        } catch (Exception ex) {
-            //            Logger.getLogger(pruebas.class.getName()).log(Level.SEVERE, null, ex);
-            //        }
-
-           //         CatalogoServicios.EliminarServicios(5);
-            Iglesia objIglesia=new Iglesia(8, "a", "a", "a", "a", "a", "a","a", 3, 1);
-            CatalogoIglesia.InsertarIglesia(objIglesia);
+            Festividades obj = CatalogoFestividades.ObtenerFestividades(1);
+            cadena=obj.getNombreFestividad();
+            
         } catch (Exception ex) {
-            System.out.println("error"+ ex.getMessage());
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaFestividad.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
+        System.out.println(cadena);
     }
 }

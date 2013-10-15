@@ -151,10 +151,7 @@ public class CatalogoGaleria extends Conexion{
                         lista.add(miPunto);
 
                     } while(respuesta.next());
-
               }
-
-
          }catch(Exception pp)
          {
              JOptionPane.showMessageDialog(null,"Error en Catalogo: ListadoGaleria "+pp.getMessage(),"ATENCION",JOptionPane.WARNING_MESSAGE);

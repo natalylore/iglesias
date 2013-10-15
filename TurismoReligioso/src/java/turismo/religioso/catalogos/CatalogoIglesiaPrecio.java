@@ -28,9 +28,8 @@ public class CatalogoIglesiaPrecio {
          try{
 
                ObjProcedimiento=conector.prepareCall("{call InsertarIglesiaPrecio(?,?)}") ;
-    
-               ObjProcedimiento.setInt(1,miIglesiaPrecio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,miIglesiaPrecio.getPrecio().getIdPrecio());
+                ObjProcedimiento.setInt(1,miIglesiaPrecio.getPrecio());
+               ObjProcedimiento.setInt(2,miIglesiaPrecio.getIglesia());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -53,14 +52,15 @@ public class CatalogoIglesiaPrecio {
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ObtenerIglesiaPrecios(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getPrecio().getIdPrecio());
-
+               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getPrecio());
+               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getIglesia());
+               
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                miIglesiaPrecio = new IglesiaPrecio();
                while(respuesta.next())  {
-                            miIglesiaPrecio.setIglesia(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)));
-                            miIglesiaPrecio.setPrecio(CatalogoPrecios.ObtenerPrecio(respuesta.getInt(2)));
+                   miIglesiaPrecio.setPrecio(respuesta.getInt(1));
+                            miIglesiaPrecio.setIglesia(respuesta.getInt(2));
+                            
                          
                                     }
 
@@ -83,8 +83,9 @@ public class CatalogoIglesiaPrecio {
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ExisteIglesiaPrecio(?,?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getPrecio().getIdPrecio());
+               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getPrecio());
+               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getIglesia());
+               
                ObjProcedimiento.registerOutParameter(3, Types.INTEGER);
                ObjProcedimiento.execute();
                resultado=ObjProcedimiento.getInt(3);
@@ -108,9 +109,10 @@ public class CatalogoIglesiaPrecio {
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaPrecios(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getPrecio().getIdPrecio());
+               ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaPrecio(?,?)}") ;
+               ObjProcedimiento.setInt(1,IdIglesiaPrecio.getPrecio());
+               ObjProcedimiento.setInt(2,IdIglesiaPrecio.getIglesia());
+               
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -136,7 +138,7 @@ public class CatalogoIglesiaPrecio {
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        IglesiaPrecio miIglesiaPrecio = new IglesiaPrecio(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoPrecios.ObtenerPrecio(respuesta.getInt(2)));
+                        IglesiaPrecio miIglesiaPrecio = new IglesiaPrecio(respuesta.getInt(2),respuesta.getInt(1));
                         lista.add(miIglesiaPrecio);
 
                     } while(respuesta.next());

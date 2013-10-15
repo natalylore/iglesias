@@ -29,9 +29,8 @@ public class CatalogoIglesiaFestividad extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call InsertarIglesiaFestividad(?,?)}") ;
-    
-               ObjProcedimiento.setInt(1,miIglesiaFestividad.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,miIglesiaFestividad.getFestividad().getIdFestividades());
+               ObjProcedimiento.setInt(1,miIglesiaFestividad.getIglesia());
+               ObjProcedimiento.setInt(2,miIglesiaFestividad.getFestividad());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -54,14 +53,14 @@ public class CatalogoIglesiaFestividad extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ObtenerIglesiaFestividad(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad().getIdFestividades());
+               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad());
 
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                miIglesiaFestividad = new IglesiaFestividad();
                while(respuesta.next())  {
-                            miIglesiaFestividad.setIglesia(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)));
-                            miIglesiaFestividad.setFestividad(CatalogoFestividades.ObtenerFestividades(respuesta.getInt(2)));
+                            miIglesiaFestividad.setIglesia(respuesta.getInt(1));
+                            miIglesiaFestividad.setFestividad(respuesta.getInt(2));
                          
                                     }
 
@@ -84,8 +83,8 @@ public class CatalogoIglesiaFestividad extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ExisteIglesiaFestividad(?,?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad().getIdFestividades());
+               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad());
                ObjProcedimiento.registerOutParameter(3, Types.INTEGER);
                ObjProcedimiento.execute();
                resultado=ObjProcedimiento.getInt(3);
@@ -109,9 +108,9 @@ public class CatalogoIglesiaFestividad extends Conexion{
 
          try{
 
-               ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaFestivade(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad().getIdFestividades());
+               ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaFestividad(?,?)}") ;
+               ObjProcedimiento.setInt(1,IdIglesiaFestividad.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaFestividad.getFestividad());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -137,7 +136,7 @@ public class CatalogoIglesiaFestividad extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        IglesiaFestividad miIglesiaFestividad = new IglesiaFestividad(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoFestividades.ObtenerFestividades(respuesta.getInt(2)));
+                        IglesiaFestividad miIglesiaFestividad = new IglesiaFestividad(respuesta.getInt(1),respuesta.getInt(2));
                         lista.add(miIglesiaFestividad);
 
                     } while(respuesta.next());

@@ -12,7 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
+import turismo.religioso.catalogos.CatalogoContactos;
 import turismo.religioso.catalogos.CatalogoIglesiaContacto;
+import turismo.religioso.clases.Contactos;
 import turismo.religioso.clases.IglesiaContactos;
 
 
@@ -101,7 +103,19 @@ public class ControladorIglesiaContactos {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-
+public String ObtenerContacto(int id){
+       String cadena="";
+        try {
+            
+            Contactos obj = CatalogoContactos.ObtenerContacto(id);
+            cadena=obj.getNombre();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaContactos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    }
     public IglesiaContactos getObjIglesiaContactos() {
         return objIglesiaContactos;
     }

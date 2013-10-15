@@ -11,7 +11,7 @@
             
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Administrar Galeria</title>
+                <title>Establecer Festividades a Iglesia</title>
             </f:facet>
             
         </h:head>
@@ -22,11 +22,11 @@
 
                 <p:layoutUnit position="north" size="215"   collapsible="true">
                     <div>
-                    <p:graphicImage value="/imagenes/iglesia1.jpg"  width="100%"/> 
+                    <p:graphicImage value="/imagenes/iglesia2.jpg"  width="100%"/> 
                     </div>
                 </p:layoutUnit>
 
-                <p:layoutUnit position="south" size="50" footer="ESPOCH - ESCUELA DE SISTEMAS" style="text-align:center" >
+                <p:layoutUnit position="south" size="50" footer="TURISMO RELIGIOSO" style="text-align:center" >
                     
                 </p:layoutUnit>
 
@@ -36,16 +36,16 @@
                          <p:submenu label="Home">
                                 <p:menuitem value="Pagina Principal" url="/faces/portal.xhtml" />                                
                          </p:submenu >
-                             <p:submenu label="Administracion">
-                                <p:menuitem value=" Administrar Laboratorios" url="/faces/laboratorios.xhtml" icon="ui-icon-document"/>
+                            <p:submenu label="Administracion">
+                               <p:menuitem value=" Administrar Laboratorios" url="/faces/laboratorios.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value=" Administrar Docentes"  url="/faces/docentes.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value=" Administrar Horarios"  url="/faces/horarios.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value=" Administrar Materias"  url="/faces/materias.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value=" Administrar Usuarios"  url="/faces/usuarios.xhtml" icon="ui-icon-document"/>
-
+                                
                          </p:submenu >
                          <p:submenu label="Control">
-                                <p:menuitem value="Asignacion de Laboratorios" url="/faces/asignacion.xhtml" icon="ui-icon-document" />
+                                <p:menuitem value="Asignacion de Laboratorios" url="/faces/asignacion.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
                          </p:submenu >
                          <p:submenu label="Informes">
@@ -63,33 +63,29 @@
 
                     <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
                    <h:form id="frmClientes">
-                       <p:dataTable id="tblClientes" value="#{controladorGaleria.listaGaleria}" 
-                                    var="galeria" rowKey="#{galeria.idGaleria}"
+                       <p:dataTable id="tblClientes" value="#{controladorIglesiaFestividad.listaFestividadSeleccionado}" 
+                                    var="iglesiafestividad" rowKey="#{iglesiafestividad.iglesia}"
                              selectionMode="single" 
-                             selection="#{controladorGaleria.objGaleriaSeleccionado}"
+                             selection="#{controladorIglesiaFestividad.objIglesiaFestividadSeleccionado}"
                               paginator="true" rows="10"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                  rowsPerPageTemplate="5,10,15">
                            
                             <f:facet name="header">
                                     
-                                    <h2>Listado de Galerias</h2>  
+                                    <h2>Iglesias - Festividades</h2>  
                             </f:facet>
-                           <p:column headerText="Codigo" sortBy="#{galeria.idGaleria}" filterBy="#{galeria.idGaleria}">
-                               <h:outputText value="#{galeria.idGaleria}"/>
-                            </p:column>                     
-                           <p:column headerText="Descripcion"  filterBy="#{galeria.descripcion}">
-                               <h:outputText value="#{galeria.descripcion}"/>
-                            </p:column>
+                           <p:column headerText="Iglesia" sortBy="#{iglesiafestividad.iglesia}" filterBy="#{iglesiafestividad.iglesia}">
+                               <h:outputText value="#{controladorIglesiaPrecio.ObtenerNombre(iglesiafestividad.iglesia)}"/>
+                    </p:column>                     
+                           <p:column headerText="Festividad"  filterBy="#{iglesiafestividad.festividad}">
+                               <h:outputText value="#{controladorIglesiaFestividad.ObtenerFestividad(iglesiafestividad.festividad)}"/>
+                    </p:column>
                        
-                           <p:column headerText="Imagen"  >
-                                <p:graphicImage value="/imagenes/lore.jpg"/> 
-                            </p:column>
                     <f:facet name="footer">
                         <p:commandButton id="btnNuevo" value="Nuevo"
                                          onclick="wdlgNuevoCliente.show();"
                                          update=":frmNuevoCliente:pngCliente"/>
-     
                         <p:commandButton id="bntEliminar" value="Eliminar"
                                          onclick="wdlgEliminarCliente.show();"
                                           update=":frmEliminarCliente:pngEliminarCliente"/>
@@ -105,42 +101,44 @@
             </p:layout>
             
             <p:dialog id="dlgNuevoCliente" widgetVar="wdlgNuevoCliente" dynamic="true"
-                       header="Nuevo Docente" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
+                       header="Establecer Festividad a Iglesia" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
                 <h:form id="frmNuevoCliente">
                         <p:panelGrid id="pngCliente" columns="2">
-                        <h:outputText value="Codigo"/>
-                        <p:inputText id="txtCodigo" value="#{controladorDocente.objDocente.id}">
-                            <p:message for="txtCodigo" display="text"/> </p:inputText>
                         
-                        <h:outputText value="Nombre"/>
-                        <p:inputText id="txtNombre" value="#{controladorDocente.objDocente.nombre}" onkeyup="this.value=this.value.toUpperCase();"/>
+                        <h:outputText value="Iglesia"/>
+                        <p:selectOneMenu  value="#{controladorIglesiaFestividad.objIglesiaFestividad.iglesia}" style="width:300px"  filter="true" filterMatchMode="startsWith" >
+                            <f:selectItems value="#{controladorIglesias.listaIglesia}" var="objIglesia" itemValue="#{objIglesia.idIglesia}" itemLabel="#{objIglesia.nombre}"/>
+                            </p:selectOneMenu>
                         
-                       
+                        <h:outputText value="Festividad"/>
+                        <p:selectOneMenu  value="#{controladorIglesiaFestividad.objIglesiaFestividad.festividad}" style="width:300px"  filter="true" filterMatchMode="startsWith" >
+                            <f:selectItems value="#{controladorFestividades.listaFestividad}" var="objFestividad" itemValue="#{objFestividad.idFestividades}" itemLabel="#{controladorIglesiaFestividad.ObtenerFestividad(objFestividad.idFestividades)}"/>
+                            </p:selectOneMenu>
+                        
+                        
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnNuevoCliente" value="Guardar"
-                                     action="#{controladorDocente.insertarDocente()}"
+                                     action="#{controladorIglesiaFestividad.insertarIglesiaFestividad()}"
                                      update=":frmClientes:tblClientes"/>
-                    <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();" actionListener="#{controladorDocente.limpiar}"/>
+                    <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();"/>
                 </h:form>
             </p:dialog >
             
             
-            
-           
-            <p:dialog id="dlgEliminarCliente" widgetVar="wdlgEliminarCliente" header="Eliminar Docente"
+           <p:dialog id="dlgEliminarCliente" widgetVar="wdlgEliminarCliente" header="Eliminar Iglesia Festividad"
                       modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
                 <h:form id="frmEliminarCliente">
                     <p:panelGrid id="pngEliminarCliente" columns="2">
-                         <h:outputText value="Codigo"/>
-                         <p:inputText value="#{controladorDocente.objDocenteSeleccionado.id}" disabled="true"/>
-                        <h:outputText value="Nombre"/>
-                        <p:inputText value="#{controladorDocente.objDocenteSeleccionado.nombre}" disabled="true"/>
+                         <h:outputText value="Iglesia"/>
+                         <p:inputText value="#{controladorIglesiaPrecio.ObtenerNombre(controladorIglesiaFestividad.objIglesiaFestividadSeleccionado.iglesia)}" disabled="true"/>
+                        <h:outputText value="Festividad"/>
+                        <p:inputText value="#{controladorIglesiaFestividad.ObtenerFestividad(controladorIglesiaFestividad.objIglesiaFestividadSeleccionado.festividad)}" disabled="true"/>
                         
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnEliminarCliente" value="Aceptar"
-                                     action="#{controladorDocente.eliminarDocente()}"
+                                     action="#{controladorIglesiaFestividad.eliminarIglesiaFestividad()}"
                                      update=":frmClientes:tblClientes"/>
                     <p:commandButton id="btnCancelarEliminar" value="Cancelar"
                                      onclick="wdlgEliminarCliente.hide();"/>
@@ -153,3 +151,4 @@
 
     </f:view>
 </html>
+

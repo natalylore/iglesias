@@ -19,9 +19,9 @@
             <p:layout fullPage="true">
 
                 <p:layoutUnit position="north" size="275"  >
-                  <div>
+                  
                     <p:graphicImage value="/imagenes/iglesia2.jpg"  width="100%"/> 
-                    </div>   
+                       
                    
                 </p:layoutUnit>
                 
@@ -44,16 +44,24 @@
 
                 <p:layoutUnit position="west" size="410" header="Menu" >
                     <p:panelMenu style="width:400px">
-                         <p:submenu label="Administracion">
-                                <p:menuitem value=" Administrar Laboratorios" url="/faces/laboratorios.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Docentes"  url="/faces/docentes.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Horarios"  url="/faces/horarios.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Materias"  url="/faces/materias.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Usuarios"  url="/faces/usuarios.xhtml" icon="ui-icon-document"/>
-                                  </p:submenu >
-                         <p:submenu label="Control">
-                                <p:menuitem value="Asignacion de Laboratorios" url="/faces/asignacion.xhtml" icon="ui-icon-document"/>
+                                <p:submenu label="Administracion">
+                               <p:menuitem value=" Administrar Estilos" url="/faces/estilo.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Contactos"  url="/faces/contacto.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Festividades"  url="/faces/festividades.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Precios"  url="/faces/precios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Puntos"  url="/faces/punto.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Servicios"  url="/faces/servicio.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Galeria"  url="/faces/Galeria.xhtml" icon="ui-icon-document"/>
+                           </p:submenu >
+                         <p:submenu label="Iglesias">
+                                <p:menuitem value="Administrar Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
+                         </p:submenu >
+                         <p:submenu label="Asignaciones">
+                                <p:menuitem value="Establecer precios a Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value="Establecer imagenes a Iglesias"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value="Establecer Contactos a Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value="Establecer Servicios a Iglesias"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
                          </p:submenu >
                          <p:submenu label="Informes">
                              <p:menuitem value="Reportes" url="/faces/reportes.xhtml" icon="ui-icon-document"/>
@@ -72,10 +80,7 @@
 
                 <p:layoutUnit position="center" >
                     
-                            <h3>GALERIA DE IMAGENES</h3>
-                            <p:galleria value="#{controladorGaleria.images}" var="image" panelWidth="800" panelHeight="400"  style="alignment-adjust: 200px">
-                        <p:graphicImage value="/imagenes/#{image}" alt="Imagen de laboratorio " />
-                    </p:galleria>
+                            una manera de programar es la web
                         
                 </p:layoutUnit>
 

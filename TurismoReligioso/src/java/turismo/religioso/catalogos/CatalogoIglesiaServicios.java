@@ -30,8 +30,8 @@ public class CatalogoIglesiaServicios extends Conexion{
 
                ObjProcedimiento=conector.prepareCall("{call InsertarIglesiaServicios(?,?)}") ;
     
-               ObjProcedimiento.setInt(1,miIglesiaServicio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,miIglesiaServicio.getServicio().getIdServicio());
+               ObjProcedimiento.setInt(1,miIglesiaServicio.getIglesia());
+               ObjProcedimiento.setInt(2,miIglesiaServicio.getServicio());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -54,14 +54,14 @@ public class CatalogoIglesiaServicios extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ObtenerIglesiaServicios(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio().getIdServicio());
+               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio());
 
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                miIglesiaServicio = new IglesiaServicios();
                while(respuesta.next())  {
-                            miIglesiaServicio.setIglesia(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)));
-                            miIglesiaServicio.setServicio(CatalogoServicios.ObtenerServicios(respuesta.getInt(2)));
+                            miIglesiaServicio.setIglesia(respuesta.getInt(1));
+                            miIglesiaServicio.setServicio(respuesta.getInt(2));
                          
                                     }
 
@@ -84,8 +84,8 @@ public class CatalogoIglesiaServicios extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ExisteIglesiaServicio(?,?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio().getIdServicio());
+               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio());
                ObjProcedimiento.registerOutParameter(3, Types.INTEGER);
                ObjProcedimiento.execute();
                resultado=ObjProcedimiento.getInt(3);
@@ -110,8 +110,8 @@ public class CatalogoIglesiaServicios extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaServicios(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio().getIdServicio());
+               ObjProcedimiento.setInt(1,IdIglesiaServicio.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaServicio.getServicio());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -137,7 +137,7 @@ public class CatalogoIglesiaServicios extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        IglesiaServicios miIglesiaServicio = new IglesiaServicios(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoServicios.ObtenerServicios(respuesta.getInt(2)));
+                        IglesiaServicios miIglesiaServicio = new IglesiaServicios(respuesta.getInt(1),respuesta.getInt(2));
                         lista.add(miIglesiaServicio);
 
                     } while(respuesta.next());

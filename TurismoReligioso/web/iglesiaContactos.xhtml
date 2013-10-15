@@ -11,7 +11,7 @@
             
             <f:facet name="first">
                 <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
-                <title>Administrar Estilos de Iglesias</title>
+                <title>Establecer Contactos a Iglesia</title>
             </f:facet>
             
         </h:head>
@@ -36,24 +36,17 @@
                          <p:submenu label="Home">
                                 <p:menuitem value="Pagina Principal" url="/faces/portal.xhtml" />                                
                          </p:submenu >
-                                   <p:submenu label="Administracion">
-                               <p:menuitem value=" Administrar Estilos" url="/faces/estilo.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Contactos"  url="/faces/contacto.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Festividades"  url="/faces/festividades.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Precios"  url="/faces/precios.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Puntos"  url="/faces/punto.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Servicios"  url="/faces/servicio.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value=" Administrar Galeria"  url="/faces/Galeria.xhtml" icon="ui-icon-document"/>
-                           </p:submenu >
-                         <p:submenu label="Iglesias">
-                                <p:menuitem value="Administrar Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
+                            <p:submenu label="Administracion">
+                               <p:menuitem value=" Administrar Laboratorios" url="/faces/laboratorios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Docentes"  url="/faces/docentes.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Horarios"  url="/faces/horarios.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Materias"  url="/faces/materias.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value=" Administrar Usuarios"  url="/faces/usuarios.xhtml" icon="ui-icon-document"/>
+                                
                          </p:submenu >
-                         <p:submenu label="Asignaciones">
-                                <p:menuitem value="Establecer precios a Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value="Establecer imagenes a Iglesias"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value="Establecer Contactos a Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
-                                <p:menuitem value="Establecer Servicios a Iglesias"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
+                         <p:submenu label="Control">
+                                <p:menuitem value="Asignacion de Laboratorios" url="/faces/asignacion.xhtml" icon="ui-icon-document"/>
+                                <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
                          </p:submenu >
                          <p:submenu label="Informes">
                              <p:menuitem value="Reportes" url="/faces/reportes.xhtml" icon="ui-icon-document"/>
@@ -66,34 +59,33 @@
                         </p:panelMenu>
                     </h:form>    
                 </p:layoutUnit>
-                <p:layoutUnit id="centerLayout" position="center">
+                <p:layoutUnit position="center">
 
                     <p:growl id="mensajes" autoUpdate="true" showDetail="true"/>
                    <h:form id="frmClientes">
-                       <p:dataTable id="tblClientes" value="#{controladorEstilo.listaEstilo}" 
-                                    var="estilo" rowKey="#{estilo.idEstilo}"
+                       <p:dataTable id="tblClientes" value="#{controladorIglesiaContactos.listaContactosSeleccionado}" 
+                                    var="iglesiacontacto" rowKey="#{iglesiacontacto.iglesia}"
                              selectionMode="single" 
-                             selection="#{controladorEstilo.objEstiloSeleccionado}"
+                             selection="#{controladorIglesiaContactos.objIglesiaContactosSeleccionado}"
                               paginator="true" rows="10"
                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                  rowsPerPageTemplate="5,10,15">
                            
                             <f:facet name="header">
                                     
-                                    <h2>Listado de Estilos</h2>  
+                                    <h2>Iglesias - Contactos</h2>  
                             </f:facet>
-                           <p:column headerText="Codigo" sortBy="#{estilo.idEstilo}" filterBy="#{estilo.idEstilo}">
-                               <h:outputText value="#{estilo.idEstilo}"/>
+                           <p:column headerText="Iglesia" sortBy="#{iglesiacontacto.iglesia}" filterBy="#{iglesiacontacto.iglesia}">
+                               <h:outputText value="#{controladorIglesiaPrecio.ObtenerNombre(iglesiacontacto.iglesia)}"/>
                     </p:column>                     
-                           <p:column headerText="Nombre"  filterBy="#{estilo.nombreEstilo}">
-                               <h:outputText value="#{estilo.nombreEstilo}"/>
+                           <p:column headerText="Contacto"  filterBy="#{iglesiacontacto.contacto}">
+                               <h:outputText value="#{controladorIglesiaContactos.ObtenerContacto(iglesiacontacto.contacto)}"/>
                     </p:column>
                        
                     <f:facet name="footer">
                         <p:commandButton id="btnNuevo" value="Nuevo"
                                          onclick="wdlgNuevoCliente.show();"
                                          update=":frmNuevoCliente:pngCliente"/>
-                    
                         <p:commandButton id="bntEliminar" value="Eliminar"
                                          onclick="wdlgEliminarCliente.show();"
                                           update=":frmEliminarCliente:pngEliminarCliente"/>
@@ -109,38 +101,44 @@
             </p:layout>
             
             <p:dialog id="dlgNuevoCliente" widgetVar="wdlgNuevoCliente" dynamic="true"
-                       header="Nuevo Estilo" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
+                       header="Establecer Contacto a Iglesia" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
                 <h:form id="frmNuevoCliente">
                         <p:panelGrid id="pngCliente" columns="2">
-                                                
-                        <h:outputText value="Nombre"/>
-                        <p:inputText id="txtNombre" value="#{controladorEstilo.objEstilo.nombreEstilo}"  onkeyup="this.value=this.value.toUpperCase();"/>
                         
-                       
+                        <h:outputText value="Iglesia"/>
+                        <p:selectOneMenu  value="#{controladorIglesiaContactos.objIglesiaContactos.iglesia}" style="width:300px"  filter="true" filterMatchMode="startsWith" >
+                            <f:selectItems value="#{controladorIglesias.listaIglesia}" var="objIglesia" itemValue="#{objIglesia.idIglesia}" itemLabel="#{objIglesia.nombre}"/>
+                            </p:selectOneMenu>
+                        
+                        <h:outputText value="Contacto"/>
+                        <p:selectOneMenu  value="#{controladorIglesiaContactos.objIglesiaContactos.contacto}" style="width:300px"  filter="true" filterMatchMode="startsWith" >
+                            <f:selectItems value="#{controladorContactos.listaContacto}" var="objContacto" itemValue="#{objContacto.idContacto}" itemLabel="#{controladorIglesiaContactos.ObtenerContacto(objContacto.idContacto)}"/>
+                            </p:selectOneMenu>
+                        
+                        
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnNuevoCliente" value="Guardar"
-                                     action="#{controladorEstilo.insertarEstilo()}"
+                                     action="#{controladorIglesiaContactos.insertarIglesiaContactos()}"
                                      update=":frmClientes:tblClientes"/>
-                    <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();" actionListener="#{controladorDocente.limpiar}"/>
+                    <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();"/>
                 </h:form>
             </p:dialog >
             
             
-            
-             <p:dialog id="dlgEliminarCliente" widgetVar="wdlgEliminarCliente" header="Eliminar Estilo"
+           <p:dialog id="dlgEliminarCliente" widgetVar="wdlgEliminarCliente" header="Eliminar Iglesia Contacto"
                       modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
                 <h:form id="frmEliminarCliente">
                     <p:panelGrid id="pngEliminarCliente" columns="2">
-                         <h:outputText value="Codigo"/>
-                         <p:inputText value="#{controladorEstilo.objEstiloSeleccionado.idEstilo}" disabled="true"/>
-                        <h:outputText value="Nombre"/>
-                        <p:inputText value="#{controladorEstilo.objEstiloSeleccionado.nombreEstilo}" disabled="true"/>
+                         <h:outputText value="Iglesia"/>
+                         <p:inputText value="#{controladorIglesiaPrecio.ObtenerNombre(controladorIglesiaContactos.objIglesiaContactosSeleccionado.iglesia)}" disabled="true"/>
+                        <h:outputText value="Contacto"/>
+                        <p:inputText value="#{controladorIglesiaContactos.ObtenerContacto(controladorIglesiaContactos.objIglesiaContactosSeleccionado.contacto)}" disabled="true"/>
                         
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnEliminarCliente" value="Aceptar"
-                                     action="#{controladorEstilo.eliminarEstilo()}"
+                                     action="#{controladorIglesiaContactos.eliminarIglesiaContatos()}"
                                      update=":frmClientes:tblClientes"/>
                     <p:commandButton id="btnCancelarEliminar" value="Cancelar"
                                      onclick="wdlgEliminarCliente.hide();"/>
@@ -153,3 +151,4 @@
 
     </f:view>
 </html>
+

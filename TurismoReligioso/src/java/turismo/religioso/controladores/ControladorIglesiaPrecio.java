@@ -11,44 +11,50 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.swing.JOptionPane;
 import org.primefaces.context.DefaultRequestContext;
+import turismo.religioso.catalogos.CatalogoIglesia;
 import turismo.religioso.catalogos.CatalogoIglesiaPrecio;
+import turismo.religioso.catalogos.CatalogoPrecios;
+import turismo.religioso.clases.Iglesia;
 import turismo.religioso.clases.IglesiaPrecio;
-
+import turismo.religioso.clases.Precios;
 
 /**
  *
- * @author Fmla Jimenez
+ * @author Checho
  */
 @ManagedBean
 @ViewScoped
-public class ControladorIglesiaPrecios {
+public class ControladorIglesiaPrecio {
 
     /**
-     * Creates a new instance of ControladorIglesiaPrecios
+     * Creates a new instance of ControladorIglesiaPrecio
      */
-   private  IglesiaPrecio objIglesiaPrecios;//objeto nuevo
+    public ControladorIglesiaPrecio() {
+                CargarIglesiaPrecio();
+objIglesiaPrecios = new IglesiaPrecio();
+    }
+    private  IglesiaPrecio objIglesiaPrecios;//objeto nuevo
     private IglesiaPrecio objIglesiaPreciosSeleccionado;
     private ArrayList<IglesiaPrecio> ListaIglesiaPrecios;
-    public ControladorIglesiaPrecios() {
-        objIglesiaPrecios = new IglesiaPrecio();
-        CargarIglesiaPrecio();
-    }
+
     private void CargarIglesiaPrecio(){
         try {
             ListaIglesiaPrecios = CatalogoIglesiaPrecio.ListadoIglesiaPrecio();
         } catch (Exception ex) {
-            Logger.getLogger(ControladorIglesiaPrecios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ControladorIglesiaPrecio.class.getName()).log(Level.SEVERE, null, ex);
         }
     } 
       
      public void insertarIglesiaPrecios() {
-        try {
-            int dato = CatalogoIglesiaPrecio.ExisteIglesiaPrecios(objIglesiaPrecios);
+        
+           // int dato = CatalogoIglesiaPrecio.ExisteIglesiaPrecios(objIglesiaPrecios);
             
-            if (dato<1) {
-                
-                
+           // if (dato<1) {
+         System.err.println("Inicio del metodo");      
+         // JOptionPane.showMessageDialog(ControladorIglesiaPrecio.this, "llega");
+               try { 
                 CatalogoIglesiaPrecio.InsertarIglesiaPrecio(objIglesiaPrecios);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
@@ -56,12 +62,13 @@ public class ControladorIglesiaPrecios {
                 CargarIglesiaPrecio();
                 DefaultRequestContext.getCurrentInstance().execute("wdlgNuevoCliente.hide()");
                 objIglesiaPrecios = new IglesiaPrecio();
-            } else {
-                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                        "Alerta!!", "El registro ya fue Insertado Anteriormente");
-                FacesContext.getCurrentInstance().addMessage(null, message);
-            }
+//            } else {
+//                FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
+//                        "Alerta!!", "El registro ya fue Insertado Anteriormente");
+//                FacesContext.getCurrentInstance().addMessage(null, message);
+//            }
         } catch (Exception e) {
+            System.out.println("ERROR "+e.getMessage());
             FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Alerta!!", e.getMessage());
             FacesContext.getCurrentInstance().addMessage(null, message);
@@ -95,7 +102,32 @@ public class ControladorIglesiaPrecios {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-
+public String ObtenerNombre(int id){
+       String cadena="";
+        try {
+            
+            Iglesia obj = CatalogoIglesia.ObtenerIglesia(id);
+            cadena= obj.getNombre();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaPrecio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    } 
+public String ObtenerPrecio(int id){
+       String cadena="";
+        try {
+            
+            Precios obj = CatalogoPrecios.ObtenerPrecio(id);
+            cadena=obj.getDescripcion()+ " VALOR:"+obj.getPrecio();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaPrecio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    }
     public IglesiaPrecio getObjIglesiaPrecios() {
         return objIglesiaPrecios;
     }

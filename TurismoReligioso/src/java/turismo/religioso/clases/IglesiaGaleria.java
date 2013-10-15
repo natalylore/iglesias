@@ -9,31 +9,32 @@ package turismo.religioso.clases;
  * @author Checho
  */
 public class IglesiaGaleria {
-    private Iglesia iglesia;
-    private Galeria galeria;
+    private int iglesia;
+    private int galeria;
 
     public IglesiaGaleria() {
     }
 
-    public IglesiaGaleria(Iglesia iglesia, Galeria galeria) {
+    public IglesiaGaleria(int iglesia, int galeria) {
         this.iglesia = iglesia;
         this.galeria = galeria;
     }
 
-    public Iglesia getIglesia() {
+    public int getIglesia() {
         return iglesia;
     }
 
-    public void setIglesia(Iglesia iglesia) {
+    public void setIglesia(int iglesia) {
         this.iglesia = iglesia;
     }
 
-    public Galeria getGaleria() {
+    public int getGaleria() {
         return galeria;
     }
 
-    public void setGaleria(Galeria galeria) {
+    public void setGaleria(int galeria) {
         this.galeria = galeria;
     }
-    
+
+   
 }

@@ -12,7 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
+import turismo.religioso.catalogos.CatalogoFestividades;
 import turismo.religioso.catalogos.CatalogoIglesiaFestividad;
+import turismo.religioso.clases.Festividades;
 import turismo.religioso.clases.IglesiaFestividad;
 
 
@@ -54,8 +56,6 @@ public class ControladorIglesiaFestividad {
             int dato = CatalogoIglesiaFestividad.ExisteIglesiaFestividad(objIglesiaFestividad);
             
             if (dato<1) {
-                
-                
                 CatalogoIglesiaFestividad.InsertarIglesiaFestividad(objIglesiaFestividad);
                 FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
                         "INSERTADO", "El registro fue Insertado");
@@ -75,7 +75,7 @@ public class ControladorIglesiaFestividad {
         }
     }
 
-        public void eliminarIglesiaContatos(){
+        public void eliminarIglesiaFestividad(){
         try {
             
 //            if (CatalogoSector.EliminarSector(objSector)) {
@@ -101,7 +101,18 @@ public class ControladorIglesiaFestividad {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-
+public String ObtenerFestividad(int id){
+       String cadena="";
+        try {
+            Festividades obj = CatalogoFestividades.ObtenerFestividades(id);
+            cadena=obj.getNombreFestividad();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaFestividad.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    }
     public IglesiaFestividad getObjIglesiaFestividad() {
         return objIglesiaFestividad;
     }

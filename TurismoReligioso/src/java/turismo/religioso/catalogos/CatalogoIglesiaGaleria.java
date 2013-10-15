@@ -30,8 +30,8 @@ public class CatalogoIglesiaGaleria extends Conexion{
 
                ObjProcedimiento=conector.prepareCall("{call InsertarIglesiaGaleria(?,?)}") ;
     
-               ObjProcedimiento.setInt(1,miIglesiaGaleria.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,miIglesiaGaleria.getGaleria().getIdGaleria());
+               ObjProcedimiento.setInt(1,miIglesiaGaleria.getIglesia());
+               ObjProcedimiento.setInt(2,miIglesiaGaleria.getGaleria());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -54,14 +54,14 @@ public class CatalogoIglesiaGaleria extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ObtenerIglesiaGaleria(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria().getIdGaleria());
+               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria());
 
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                miIglesiaGaleria = new IglesiaGaleria();
                while(respuesta.next())  {
-                            miIglesiaGaleria.setIglesia(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)));
-                            miIglesiaGaleria.setGaleria(CatalogoGaleria.ObtenerGaleria(respuesta.getInt(2)));
+                            miIglesiaGaleria.setIglesia(respuesta.getInt(1));
+                            miIglesiaGaleria.setGaleria(respuesta.getInt(2));
                          
                                     }
 
@@ -84,8 +84,8 @@ public class CatalogoIglesiaGaleria extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call ExisteIglesiaGaleria(?,?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria().getIdGaleria());
+               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria());
                ObjProcedimiento.registerOutParameter(3, Types.INTEGER);
                ObjProcedimiento.execute();
                resultado=ObjProcedimiento.getInt(3);
@@ -110,8 +110,8 @@ public class CatalogoIglesiaGaleria extends Conexion{
          try{
 
                ObjProcedimiento=conector.prepareCall("{call EliminarIglesiaGaleria(?,?)}") ;
-               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia().getIdIglesia());
-               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria().getIdGaleria());
+               ObjProcedimiento.setInt(1,IdIglesiaGaleria.getIglesia());
+               ObjProcedimiento.setInt(2,IdIglesiaGaleria.getGaleria());
                ObjProcedimiento.execute();
                resultado=true;
 
@@ -137,7 +137,7 @@ public class CatalogoIglesiaGaleria extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        IglesiaGaleria miIglesiaGaleria = new IglesiaGaleria(CatalogoIglesia.ObtenerIglesia(respuesta.getInt(1)),CatalogoGaleria.ObtenerGaleria(respuesta.getInt(2)));
+                        IglesiaGaleria miIglesiaGaleria = new IglesiaGaleria(respuesta.getInt(1),respuesta.getInt(2));
                         lista.add(miIglesiaGaleria);
 
                     } while(respuesta.next());

@@ -13,7 +13,9 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
 import turismo.religioso.catalogos.CatalogoIglesiaServicios;
+import turismo.religioso.catalogos.CatalogoServicios;
 import turismo.religioso.clases.IglesiaServicios;
+import turismo.religioso.clases.Servicios;
 
 
 /**
@@ -96,7 +98,19 @@ public class ControladorIglesiaServicios {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }        
     }
-
+public String ObtenerServicios(int id){
+       String cadena="";
+        try {
+            Servicios obj = CatalogoServicios.ObtenerServicios(id);
+            cadena=obj.getNombre();
+            
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaServicios.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    }
+        
     public IglesiaServicios getObjIglesiaServicios() {
         return objIglesiaServicios;
     }

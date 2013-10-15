@@ -9,29 +9,30 @@ package turismo.religioso.clases;
  * @author Checho
  */
 public class IglesiaFestividad {
-    private Iglesia iglesia;
-    private Festividades festividad;
-    
-    public IglesiaFestividad(Iglesia iglesia, Festividades festividad) {
-        this.iglesia = iglesia;
-        this.festividad = festividad;
-    }
+    private int iglesia;
+    private int festividad;
+   
     public IglesiaFestividad() {
     }
 
-    public Iglesia getIglesia() {
+    public IglesiaFestividad(int iglesia, int festividad) {
+        this.iglesia = iglesia;
+        this.festividad = festividad;
+    }
+
+    public int getIglesia() {
         return iglesia;
     }
 
-    public void setIglesia(Iglesia iglesia) {
+    public void setIglesia(int iglesia) {
         this.iglesia = iglesia;
     }
 
-    public Festividades getFestividad() {
+    public int getFestividad() {
         return festividad;
     }
 
-    public void setFestividad(Festividades festividad) {
+    public void setFestividad(int festividad) {
         this.festividad = festividad;
     }
     

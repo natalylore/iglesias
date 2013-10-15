@@ -64,7 +64,8 @@ public class CatalogoFestividades extends Conexion{
                while(respuesta.next())  {
                             miFestividad.setIdFestividades(respuesta.getInt(1));
                             miFestividad.setNombreFestividad(respuesta.getString(2));
-                            miFestividad.setFecha(respuesta.getDate(3));
+                            miFestividad.setDescripcion(respuesta.getString(3));
+                            miFestividad.setFecha(respuesta.getDate(4));
                             
                                     }
 
