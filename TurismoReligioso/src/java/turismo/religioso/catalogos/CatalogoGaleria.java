@@ -58,14 +58,10 @@ public class CatalogoGaleria extends Conexion{
     }
 
     public static Galeria  ObtenerGaleria(int Idgaleria) throws Exception{
-
-
          Galeria miPunto=null;
          CallableStatement ObjProcedimiento;
          Connection conector = estado();
-
          try{
-
                ObjProcedimiento=conector.prepareCall("{call ObtenerGaleria(?)}") ;
                ObjProcedimiento.setInt(1,Idgaleria);
 
@@ -74,7 +70,7 @@ public class CatalogoGaleria extends Conexion{
                while(respuesta.next())  {
                             miPunto.setIdGaleria(respuesta.getInt(1));
                             miPunto.setDescripcion(respuesta.getString(2));
-                            miPunto.setImagen(obtenerImagen(respuesta.getBlob(3)));
+//                            miPunto.setImagen(obtenerImagen(respuesta.getBlob(3)));
                                     }
 
          }catch(Exception pp)
@@ -147,7 +143,7 @@ public class CatalogoGaleria extends Conexion{
                ResultSet respuesta = ObjProcedimiento.executeQuery();
                if (respuesta.next()){
                     do {
-                        Galeria miPunto = new Galeria(respuesta.getInt(1),respuesta.getString(2),obtenerImagen(respuesta.getBlob(3)));
+                        Galeria miPunto = new Galeria(respuesta.getInt(1),respuesta.getString(2));
                         lista.add(miPunto);
 
                     } while(respuesta.next());

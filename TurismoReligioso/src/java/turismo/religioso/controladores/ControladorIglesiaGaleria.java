@@ -12,7 +12,9 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import org.primefaces.context.DefaultRequestContext;
+import turismo.religioso.catalogos.CatalogoGaleria;
 import turismo.religioso.catalogos.CatalogoIglesiaGaleria;
+import turismo.religioso.clases.Galeria;
 import turismo.religioso.clases.IglesiaGaleria;
 
 
@@ -68,7 +70,18 @@ public class ControladorIglesiaGaleria {
             FacesContext.getCurrentInstance().addMessage(null, message);
         }
     }
-
+public String ObtenerNombreGaleria(int id){
+       String cadena="";
+        try {
+            Galeria obj = CatalogoGaleria.ObtenerGaleria(id);
+            cadena=obj.getDescripcion();
+           
+        } catch (Exception ex) {
+            System.out.println("ERROR "+ex.getMessage());
+            Logger.getLogger(ControladorIglesiaGaleria.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cadena;
+    }
         public void eliminarIglesiGaleria(){
         try {
             

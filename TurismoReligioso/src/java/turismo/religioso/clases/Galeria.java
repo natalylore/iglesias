@@ -18,6 +18,11 @@ public class Galeria {
     public Galeria() {
     }
 
+    public Galeria(int idGaleria, String descripcion) {
+        this.idGaleria = idGaleria;
+        this.descripcion = descripcion;
+    }
+
     public Galeria(int idGaleria, String descripcion, Image imagen) {
         this.idGaleria = idGaleria;
         this.descripcion = descripcion;
