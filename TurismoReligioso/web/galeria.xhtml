@@ -45,7 +45,8 @@
                                 <p:menuitem value=" Administrar Servicios"  url="/faces/servicio.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value=" Administrar Galeria"  url="/faces/galeria.xhtml" icon="ui-icon-document"/>
                            </p:submenu >
-                           <p:submenu label="Iglesias">
+
+                            <p:submenu label="Iglesias">
                                 <p:menuitem value="Administrar Iglesias" url="/faces/iglesia.xhtml" icon="ui-icon-document"/>
                                 <p:menuitem value="Registro"  url="/faces/registro.xhtml" icon="ui-icon-document"/>
                          </p:submenu >
@@ -107,19 +108,18 @@
             </p:layout>
             
             <p:dialog id="dlgNuevoCliente" widgetVar="wdlgNuevoCliente" dynamic="true"
-                       header="Nuevo Punto" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
+                       header="Nueva Galeria" modal="true" closable="false" showEffect="explode" hideEffect="drop" resizable="false">
                 <h:form id="frmNuevoCliente">
                         <p:panelGrid id="pngCliente" columns="2">
                                                 
-                        <h:outputText value="Latitud"/>
-                        <p:inputText id="txtDescripcion" value="#{controladorPunto.objPunto.latitud}"  onkeyup="this.value=this.value.toUpperCase();"/>
-                        <h:outputText value="Longitud"/>
-                        <p:inputText id="txtValor" value="#{controladorPunto.objPunto.longitud}"/>
+                        <h:outputText value="Descripcion"/>
+                        <p:inputText id="txtDescripcion" value="#{controladorGaleria.objGaleria.descripcion}"  onkeyup="this.value=this.value.toUpperCase();"/>
+                        
                         
                     </p:panelGrid>
                     <p:separator />
                     <p:commandButton id="btnNuevoCliente" value="Guardar"
-                                     action="#{controladorPunto.insertarPunto()}"
+                                     action="#{controladorGaleria.insertarGaleria()}"
                                      update=":frmClientes:tblClientes"/>
                     <p:commandButton id="bntCancelarNuevo"   update="pngCliente" value="Cancelar" onclick="wdlgNuevoCliente.hide();" actionListener="#{controladorDocente.limpiar}"/>
                 </h:form>
